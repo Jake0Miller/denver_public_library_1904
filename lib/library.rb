@@ -1,4 +1,9 @@
 class Library
-  def initialize
+  attr_reader :name, :books, :authors
+
+  def initialize(name)
+    @name = name
+    @books = []
+    @authors = []
   end
 end
