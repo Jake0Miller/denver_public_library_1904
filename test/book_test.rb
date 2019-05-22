@@ -12,8 +12,8 @@ class BookTest < Minitest::Test
   end
 
   def test_attributes
-    @book.title = "To Kill a Mockingbird"
-    @book.publication_year = "1960"
-    @book.author = "Harper Lee"
+    assert_equal "To Kill a Mockingbird", @book.title
+    assert_equal "1960", @book.publication_year
+    assert_equal "Harper Lee", @book.author
   end
 end
