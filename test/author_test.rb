@@ -3,7 +3,7 @@ require 'minitest/pride'
 require './lib/book'
 require './lib/author'
 
-class BookTest < Minitest::Test
+class AuthorTest < Minitest::Test
   def setup
     @charlotte_bronte = Author.new({first_name: "Charlotte", last_name: "Bronte"})
   end
