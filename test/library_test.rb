@@ -46,4 +46,26 @@ class LibraryTest < Minitest::Test
     expected = {:start=>"1960", :end=>"1960"}
     assert_equal expected, @dpl.publication_time_frame_for(@harper_lee)
   end
+
+  def test_checkout
+    assert_equal [], @dpl.checked_out_books
+    assert_equal false, @jane_eyre.checkout
+
+    @dpl.add_author(@charlotte_bronte)
+    @dpl.add_author(@harper_lee)
+
+    assert_equal true, @jane_eyre.checkout
+    assert_equal [@jane_eyre], @dpl.checked_out_books
+    assert_equal false, @jane_eyre.checkout
+    assert_equal true, @mockingbird.checkout
+
+    @dpl.return(@jane_eyre)
+
+    assert_equal [@mockingbird], @dpl.checked_out_books
+
+    @dpl.checkout(@jane_eyre)
+
+    assert_equal [@mockingbird, @jane_eyre], @dpl.checked_out_books
+    assert_equal @jane, @dpl.most_popular_book
+  end
 end
