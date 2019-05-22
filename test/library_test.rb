@@ -49,15 +49,15 @@ class LibraryTest < Minitest::Test
 
   def test_checkout
     assert_equal [], @dpl.checked_out_books
-    assert_equal false, @jane_eyre.checkout
+    assert_equal false, @dpl.checkout(@jane_eyre)
 
     @dpl.add_author(@charlotte_bronte)
     @dpl.add_author(@harper_lee)
 
-    assert_equal true, @jane_eyre.checkout
+    assert_equal true, @dpl.checkout(@jane_eyre)
     assert_equal [@jane_eyre], @dpl.checked_out_books
-    assert_equal false, @jane_eyre.checkout
-    assert_equal true, @mockingbird.checkout
+    assert_equal false, @dpl.checkout(@jane_eyre)
+    assert_equal true, @dpl.checkout(@mockingbird)
 
     @dpl.return(@jane_eyre)
 
@@ -65,7 +65,8 @@ class LibraryTest < Minitest::Test
 
     @dpl.checkout(@jane_eyre)
 
-    assert_equal [@mockingbird, @jane_eyre], @dpl.checked_out_books
-    assert_equal @jane, @dpl.most_popular_book
+    assert @dpl.checked_out_books.include?(@mockingbird)
+    assert @dpl.checked_out_books.include?(@jane_eyre)
+    assert_equal @jane_eyre, @dpl.most_popular_book
   end
 end

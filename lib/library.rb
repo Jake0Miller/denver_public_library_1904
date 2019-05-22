@@ -21,4 +21,23 @@ class Library
     fin = fin.publication_year
     { start: start, end: fin }
   end
+
+  def checked_out_books
+    books.find_all { |book| book.checked_out? }
+  end
+
+  def checkout(book)
+    return false if !books.include?(book)
+    return false if book.checked_out?
+    book.checkout
+    true
+  end
+
+  def return(book)
+    book.return
+  end
+
+  def most_popular_book
+    books.max { |a,b| a.checkouts <=> b.checkouts }
+  end
 end
