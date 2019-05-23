@@ -3,7 +3,7 @@ class Book
   def initialize(stats)
     @author = "#{stats[:author_first_name]} #{stats[:author_last_name]}"
     @title = stats[:title]
-    @publication_year = stats[:publication_date].split(' ').last
+    @publication_year = stats[:publication_date][-4..-1]
     @checked_out = false
     @checkouts = 0
   end

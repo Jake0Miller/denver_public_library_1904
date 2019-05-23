@@ -15,11 +15,8 @@ class Library
   end
 
   def publication_time_frame_for(author)
-    start = author.books.min {|a,b| a.publication_year <=> b.publication_year}
-    start = start.publication_year
-    fin = author.books.max {|a,b| a.publication_year <=> b.publication_year}
-    fin = fin.publication_year
-    { start: start, end: fin }
+    books = author.books.minmax{|a,b| a.publication_year <=> b.publication_year}
+    { start: books[0].publication_year, end: books[1].publication_year }
   end
 
   def checked_out_books
