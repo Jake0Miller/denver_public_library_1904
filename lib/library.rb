@@ -24,8 +24,7 @@ class Library
   end
 
   def checkout(book)
-    return false if !books.include?(book)
-    return false if book.checked_out?
+    return false if !books.include?(book) || book.checked_out?
     book.checkout
     true
   end
